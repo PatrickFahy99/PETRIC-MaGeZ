@@ -10,7 +10,7 @@ import math
 import abc
 import parallelproj
 import array_api_compat.numpy as np
-from array_api_compat import get_namespace, device
+from array_api_compat import get_namespace, device, to_device
 
 if TYPE_CHECKING:
     import cupy as cp
@@ -96,7 +96,7 @@ class SmoothSubsetFunction(abc.ABC):
             res = self._xp.reshape(res, (res.size,))
 
         if dev_input != self._dev:
-            res = self._xp.to_device(res, dev_input)
+            res = to_device(res, dev_input)
 
         return res
 
